@@ -95,6 +95,7 @@ Rails.application.configure do
   end
 
   # Do not dump schema after migrations.
+  # config.action_mailer.default_url_options = { host: "https://kasuri.tw" }
   config.active_record.dump_schema_after_migration = false
 
   # Inserts middleware to perform automatic connection switching.
