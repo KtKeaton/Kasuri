@@ -10,7 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_12_11_075029) do
+ActiveRecord::Schema.define(version: 2021_12_11_075659) do
+
+  create_table "channels", force: :cascade do |t|
+    t.string "name"
+    t.string "topic"
+    t.text "description"
+    t.integer "space_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["space_id"], name: "index_channels_on_space_id"
+  end
 
   create_table "managers", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -52,6 +62,7 @@ ActiveRecord::Schema.define(version: 2021_12_11_075029) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "channels", "spaces"
   add_foreign_key "space_users", "Spaces"
   add_foreign_key "space_users", "Users"
 end
