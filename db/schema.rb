@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_12_11_080847) do
+ActiveRecord::Schema.define(version: 2021_12_12_031243) do
 
   create_table "channel_users", force: :cascade do |t|
     t.integer "channel_id", null: false
@@ -41,6 +41,16 @@ ActiveRecord::Schema.define(version: 2021_12_11_080847) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["email"], name: "index_managers_on_email", unique: true
     t.index ["reset_password_token"], name: "index_managers_on_reset_password_token", unique: true
+  end
+
+  create_table "messages", force: :cascade do |t|
+    t.text "content"
+    t.integer "user_id", null: false
+    t.integer "channel_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["channel_id"], name: "index_messages_on_channel_id"
+    t.index ["user_id"], name: "index_messages_on_user_id"
   end
 
   create_table "space_users", force: :cascade do |t|
@@ -74,6 +84,8 @@ ActiveRecord::Schema.define(version: 2021_12_11_080847) do
   add_foreign_key "channel_users", "channels"
   add_foreign_key "channel_users", "users"
   add_foreign_key "channels", "spaces"
+  add_foreign_key "messages", "channels"
+  add_foreign_key "messages", "users"
   add_foreign_key "space_users", "Spaces"
   add_foreign_key "space_users", "Users"
 end
