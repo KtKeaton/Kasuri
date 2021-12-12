@@ -4,6 +4,8 @@ Rails.application.routes.draw do
 
   root to: "welcome#index"
 
-
+  # namespace :admin do
+  #   r
+  # end
 
 end
